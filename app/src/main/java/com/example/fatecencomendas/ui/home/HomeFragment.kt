@@ -1,27 +1,54 @@
 package com.example.fatecencomendas.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.fatecencomendas.R
+import com.example.fatecencomendas.databinding.FragmentHomeBinding
+import com.example.fatecencomendas.util.AppConstants
 
 class HomeFragment : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModels()
+
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        viewModel.initRepositories(requireContext())
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setListeners()
+
+        viewModel.getPackageFromUserID(arguments?.getInt(AppConstants.LOGIN_ID_PARAMETER)!!)
+
+        binding.tvExit.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
     }
 
+    private fun setListeners() {
+        viewModel.packageList.observe(viewLifecycleOwner) {
+            with(binding) {
+                if (it.isNullOrEmpty()) {
+                    tvNoPackage.visibility = View.VISIBLE
+                    rvPackages.visibility = View.GONE
+                } else {
+                    tvNoPackage.visibility = View.GONE
+                    rvPackages.visibility = View.VISIBLE
+                    rvPackages.adapter = HomeAdapter(it)
+                }
+            }
+        }
+    }
 }
