@@ -13,5 +13,8 @@ class AppConstants {
 
         //Shared Preferences
         const val LOGIN_ID_PARAMETER = "idParameter"
+
+        const val USERTYPE_COMMON = 0
+        const val USERTYPE_ADMIN = 1
     }
 }

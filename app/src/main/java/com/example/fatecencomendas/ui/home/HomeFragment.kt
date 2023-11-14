@@ -1,11 +1,10 @@
 package com.example.fatecencomendas.ui.home
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fatecencomendas.R
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
 
         viewModel.getPackageFromUserID(arguments?.getInt(AppConstants.LOGIN_ID_PARAMETER)!!)
 
-        binding.tvExit.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
+        binding.tvExitHome.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
     }
 
     private fun setListeners() {

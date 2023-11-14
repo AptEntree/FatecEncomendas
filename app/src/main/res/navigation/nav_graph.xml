@@ -15,4 +15,8 @@
         android:name="com.example.fatecencomendas.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/addPackageFragment"
+        android:name="com.example.fatecencomendas.ui.add.AddPackageFragment"
+        android:label="AddPackageFragment" />
 </navigation>

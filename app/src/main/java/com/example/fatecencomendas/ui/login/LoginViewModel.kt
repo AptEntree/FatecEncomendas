@@ -14,8 +14,8 @@ class LoginViewModel : ViewModel() {
 
     private lateinit var userRepository: UserRepository
 
-    private val _loginInfo: MutableLiveData<Int> = MutableLiveData()
-    val loginInfo: LiveData<Int> get() = _loginInfo
+    private val _loginInfo: MutableLiveData<Pair<Int, Int>> = MutableLiveData()
+    val loginInfo: LiveData<Pair<Int, Int>> get() = _loginInfo
 
     fun initRepositories(context: Context) {
         userRepository = UserRepository(context)
@@ -26,9 +26,9 @@ class LoginViewModel : ViewModel() {
             userRepository.flowUserByEmail(email).onEach {
                 if (it != null) {
                     if (it.password == password) {
-                        _loginInfo.postValue(it.uid)
-                    } else _loginInfo.postValue(-2)
-                } else _loginInfo.postValue(-1)
+                        _loginInfo.postValue(Pair(it.uid, it.userType))
+                    } else _loginInfo.postValue(Pair(-1, -2))
+                } else _loginInfo.postValue(Pair(-1, -2))
             }.collect()
         }
     }

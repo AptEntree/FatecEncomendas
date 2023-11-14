@@ -7,11 +7,11 @@ import com.example.fatecencomendas.data.entity.UserEntity
 import com.example.fatecencomendas.data.repository.PackageRepository
 import com.example.fatecencomendas.data.repository.UserRepository
 import com.example.fatecencomendas.databinding.ActivityMainBinding
+import com.example.fatecencomendas.util.AppConstants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.Date
 
 class MainActivity : FragmentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : FragmentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //setDummyData()
+        setDummyData()
     }
 
     private fun setDummyData() {
@@ -73,20 +73,40 @@ class MainActivity : FragmentActivity() {
 
             loginRepository.addUser(
                 UserEntity(
-                    uid = 1,
+                    uid = 0,
                     email = "teste",
                     password = "teste",
-                    userType = 1,
+                    userType = AppConstants.USERTYPE_COMMON,
                     name = "Ordep"
                 )
             )
 
             loginRepository.addUser(
                 UserEntity(
-                    uid = 2,
+                    uid = 0,
+                    email = "teste11",
+                    password = "teste11",
+                    userType = AppConstants.USERTYPE_COMMON,
+                    name = "Pedro 1"
+                )
+            )
+
+            loginRepository.addUser(
+                UserEntity(
+                    uid = 0,
+                    email = "teste22",
+                    password = "teste22",
+                    userType = AppConstants.USERTYPE_COMMON,
+                    name = "Pedro 2"
+                )
+            )
+
+            loginRepository.addUser(
+                UserEntity(
+                    uid = 10,
                     email = "teste2",
                     password = "teste2",
-                    userType = 1,
+                    userType = AppConstants.USERTYPE_ADMIN,
                     name = "AHAHAHA"
                 )
             )
