@@ -21,9 +21,9 @@ class HomeViewModel : ViewModel() {
         packageRepository = PackageRepository(context)
     }
 
-    fun getPackageFromUserID(id: Int) {
+    fun getPackageFromUserUid(email: String?) {
         viewModelScope.launch {
-            packageRepository.flowPackageByUser(id).onEach {
+            packageRepository.flowPackageByUserEmail(email).onEach {
                 _packageList.postValue(it)
             }.collect()
         }

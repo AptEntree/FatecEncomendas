@@ -15,6 +15,6 @@ interface PackageDao {
     @Insert
     fun insert(post: PackageEntity)
 
-    @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE addresseeId = :id")
-    fun flowPackageByUser(id: Int): Flow<List<PackageEntity>>
+    @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE addresseeEmail = :email")
+    fun flowPackageByUserEmail(email: String?): Flow<List<PackageEntity>>
 }

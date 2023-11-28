@@ -7,7 +7,6 @@ import com.example.fatecencomendas.data.entity.UserEntity
 import com.example.fatecencomendas.data.repository.PackageRepository
 import com.example.fatecencomendas.data.repository.UserRepository
 import com.example.fatecencomendas.databinding.ActivityMainBinding
-import com.example.fatecencomendas.util.AppConstants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,80 +33,61 @@ class MainActivity : FragmentActivity() {
             packageRepository.addPackage(
                 PackageEntity(
                     uid = 0,
-                    addresseeId = 1,
+                    addresseeEmail = "pedro@test.com",
                     arrivedDate = simpleDateFormat.format(Date()),
                     pickupDate = simpleDateFormat.format(Date()),
-                    receiverName = "Pedro Henrique Vieira"
+                    receiverEmail = "pedro@admin.com"
                 )
             )
 
             packageRepository.addPackage(
                 PackageEntity(
                     uid = 0,
-                    addresseeId = 1,
+                    addresseeEmail = "pedro@test.com",
                     arrivedDate = simpleDateFormat.format(Date()),
                     pickupDate = simpleDateFormat.format(Date()),
-                    receiverName = "Pedro Vieira"
+                    receiverEmail = "pedro@admin.com"
                 )
             )
 
             packageRepository.addPackage(
                 PackageEntity(
                     uid = 0,
-                    addresseeId = 1,
+                    addresseeEmail = "pedro@test.com",
                     arrivedDate = simpleDateFormat.format(Date()),
                     pickupDate = simpleDateFormat.format(Date()),
-                    receiverName = "Não é o Pedro"
+                    receiverEmail = "pedro@admin.com"
                 )
             )
 
             packageRepository.addPackage(
                 PackageEntity(
                     uid = 0,
-                    addresseeId = 1,
+                    addresseeEmail = "adrielly@test.com",
                     arrivedDate = simpleDateFormat.format(Date()),
                     pickupDate = simpleDateFormat.format(Date()),
-                    receiverName = "Adriely"
+                    receiverEmail = "pedro@admin.com"
                 )
             )
 
             loginRepository.addUser(
                 UserEntity(
-                    uid = 0,
-                    email = "teste",
-                    password = "teste",
-                    userType = AppConstants.USERTYPE_COMMON,
-                    name = "Ordep"
+                    uid = "J3rWITrQMnZpvBaRDA0bnnRFirV2",
+                    email = "pedro@test.com"
                 )
             )
 
             loginRepository.addUser(
                 UserEntity(
-                    uid = 0,
-                    email = "teste11",
-                    password = "teste11",
-                    userType = AppConstants.USERTYPE_COMMON,
-                    name = "Pedro 1"
+                    uid = "TIdg2d6tM9OayKEMkXF1AtkGTUq2",
+                    email = "adrielly@test.com"
                 )
             )
 
             loginRepository.addUser(
                 UserEntity(
-                    uid = 0,
-                    email = "teste22",
-                    password = "teste22",
-                    userType = AppConstants.USERTYPE_COMMON,
-                    name = "Pedro 2"
-                )
-            )
-
-            loginRepository.addUser(
-                UserEntity(
-                    uid = 10,
-                    email = "teste2",
-                    password = "teste2",
-                    userType = AppConstants.USERTYPE_ADMIN,
-                    name = "AHAHAHA"
+                    uid = "dlgkhL3kDtUDAJrzFAo4YRsZHKF2",
+                    email = "pedro@admin.com"
                 )
             )
         }

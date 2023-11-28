@@ -9,6 +9,8 @@ import com.example.fatecencomendas.data.entity.PackageEntity
 import com.example.fatecencomendas.data.entity.UserEntity
 import com.example.fatecencomendas.data.repository.PackageRepository
 import com.example.fatecencomendas.data.repository.UserRepository
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -40,23 +42,21 @@ class AddPackageViewModel : ViewModel() {
         }
     }
 
-    fun addNewPackage(receiverId: Int, addresseeId: Int) {
+    fun addNewPackage(addresseeEmail: String) {
         val simpleDateFormat = SimpleDateFormat("MM-dd-yyyy")
         viewModelScope.launch {
-            userRepository.flowUserById(receiverId).onEach {
                 CoroutineScope(Dispatchers.IO).launch {
                     packageRepository.addPackage(
                         PackageEntity(
                             uid = 0,
-                            addresseeId = addresseeId,
+                            addresseeEmail = addresseeEmail,
                             arrivedDate = simpleDateFormat.format(Date()),
                             pickupDate = "-",
-                            receiverName = it?.name?: ""
+                            receiverEmail = Firebase.auth.currentUser?.email
                         )
                     )
                     _wasAdded.postValue(true)
                 }
-            }.collect()
         }
     }
 }

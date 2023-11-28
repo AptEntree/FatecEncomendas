@@ -28,7 +28,7 @@ class HomeAdapter(private val renderList: List<PackageEntity>) :
         fun bind(packageEntity: PackageEntity) {
             with(binding) {
                 packageArrived.text = "Arrived: ${packageEntity.arrivedDate}"
-                packageReceiver.text = "Receiver: ${packageEntity.receiverName}"
+                packageReceiver.text = "Receiver: ${packageEntity.receiverEmail}"
                 packagePickUp.text = "Removed: ${packageEntity.pickupDate}"
             }
         }

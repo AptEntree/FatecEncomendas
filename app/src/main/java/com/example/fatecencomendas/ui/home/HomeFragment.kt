@@ -9,7 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fatecencomendas.R
 import com.example.fatecencomendas.databinding.FragmentHomeBinding
-import com.example.fatecencomendas.util.AppConstants
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
@@ -31,9 +32,12 @@ class HomeFragment : Fragment() {
 
         setListeners()
 
-        viewModel.getPackageFromUserID(arguments?.getInt(AppConstants.LOGIN_ID_PARAMETER)!!)
+        Firebase.auth.currentUser?.let { viewModel.getPackageFromUserUid(it.email) }
 
-        binding.tvExitHome.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
+        binding.tvExitHome.setOnClickListener {
+            Firebase.auth.signOut()
+            findNavController().navigate(R.id.loginFragment)
+        }
     }
 
     private fun setListeners() {

@@ -8,9 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class PackageRepository(context: Context){
     private val packageDao = FatecPackageDatabase.getInstance(context).packageDao()
 
-    fun flowAll(): Flow<List<PackageEntity>> = packageDao.flowAll()
-
-    fun flowPackageByUser(id: Int): Flow<List<PackageEntity>> = packageDao.flowPackageByUser(id)
+    fun flowPackageByUserEmail(email: String?): Flow<List<PackageEntity>> = packageDao.flowPackageByUserEmail(email)
 
     fun addPackage(packageEntity: PackageEntity) = packageDao.insert(packageEntity)
 

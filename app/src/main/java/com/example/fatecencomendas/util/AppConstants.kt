@@ -11,10 +11,7 @@ class AppConstants {
         const val USER_TABLE = "user"
         const val POST_TABLE = "package"
 
-        //Shared Preferences
-        const val LOGIN_ID_PARAMETER = "idParameter"
+        fun isAdmin(email: String) = email.contains("@admin")
 
-        const val USERTYPE_COMMON = 0
-        const val USERTYPE_ADMIN = 1
     }
 }

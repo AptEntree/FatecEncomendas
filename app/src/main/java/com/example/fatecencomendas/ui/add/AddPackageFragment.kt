@@ -12,7 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fatecencomendas.R
 import com.example.fatecencomendas.databinding.FragmentAddPackageBinding
-import com.example.fatecencomendas.util.AppConstants
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class AddPackageFragment : Fragment() {
 
@@ -38,22 +39,24 @@ class AddPackageFragment : Fragment() {
 
         viewModel.getUserList()
 
-        binding.tvExitAdd.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
+        binding.tvExitAdd.setOnClickListener {
+            Firebase.auth.signOut()
+            findNavController().navigate(R.id.loginFragment)
+        }
     }
 
     private fun setListeners() {
         viewModel.userList.observe(viewLifecycleOwner) {
             with(binding) {
-                spUsers.adapter = ArrayAdapter<String>(
+                spUsers.adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_spinner_dropdown_item,
-                    it.map { it.name })
+                    it.map { it.email })
                 spUsers.onItemSelectedListener = ItemSelectListener()
 
                 btAddPackage.setOnClickListener { _ ->
                     viewModel.addNewPackage(
-                        arguments?.getInt(AppConstants.LOGIN_ID_PARAMETER)!!,
-                        it[positionSelected].uid
+                        it[positionSelected].email
                     )
                 }
             }

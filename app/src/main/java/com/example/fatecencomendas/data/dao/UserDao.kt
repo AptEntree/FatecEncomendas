@@ -12,14 +12,11 @@ interface UserDao {
     @Query("SELECT * FROM ${AppConstants.USER_TABLE}")
     fun flowAll(): Flow<List<UserEntity>>
 
-    @Query("SELECT * FROM ${AppConstants.USER_TABLE} WHERE userType = ${AppConstants.USERTYPE_COMMON}")
+    @Query("SELECT * FROM ${AppConstants.USER_TABLE} WHERE email NOT LIKE '%@admin%'")
     fun flowAllNormalUsers(): Flow<List<UserEntity>>
 
-    @Query("SELECT * FROM ${AppConstants.USER_TABLE} WHERE email = :email")
-    fun findUserByEmail(email: String): Flow<UserEntity?>
-
-    @Query("SELECT * FROM ${AppConstants.USER_TABLE} WHERE uid = :id")
-    fun findUserById(id: Int): Flow<UserEntity?>
+    @Query("SELECT * FROM ${AppConstants.USER_TABLE} WHERE uid = :uid")
+    fun findUserByUid(uid: String): Flow<UserEntity?>
 
     @Insert
     fun insert(user: UserEntity)
